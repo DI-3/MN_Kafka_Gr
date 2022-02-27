@@ -1,0 +1,38 @@
+spring:
+  kafka:
+    properties:
+      bootstrap-servers: pkc-419q3.us-east4.gcp.confluent.cloud:9092
+      security.protocol: SASL_SSL
+      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule   required username='T6CT2FDZ2R34OLE6'   password='+BFq6ONb+JZVNZxPy3zXEfhZMKwBLK1oeTA+Is/e+Nvw3giL3JtKKVcozecwWCkt';"
+      sasl.mechanism: PLAIN
+      client.dns.lookup: use_all_dns_ips
+      # Best practice for higher availability in Apache Kafka clients prior to 3.0
+      session.timeout.ms: 45000
+      basic.auth.credentials.source: USER_INFO
+      schema.registry.basic.auth.user.info: 3L4DAOK7ZCH27QX5:hu2J/Jx+EUVGR9vwWK1R8r2E/Ui1aUlF7iMiM15GznCcOc4WoWruWFmpxMVm/tKS
+      schema.registry.url: https://psrc-xqq6z.us-central1.gcp.confluent.cloud
+      acks: all
+    producer:
+      bootstrap-servers: pkc-419q3.us-east4.gcp.confluent.cloud:9092
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+
+    consumer:
+      bootstrap-servers: pkc-419q3.us-east4.gcp.confluent.cloud:9092
+      group-id: mn-consumer-app
+      auto-offset-reset: earliest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.IntegerDeserializer
+        spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+        spring.json.value.default.type: com.event.jobevents.JobItem
+        spring.json.use.type.headers: false
+
+jobrunr:
+  job-scheduler:
+    enabled: true
+  background-job-server:
+    enabled: true
+  dashboard:
+    enabled: true

@@ -1,0 +1,15 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "jobDesc",
+      "type": "string"
+    }
+  ],
+  "name": "jobitem",
+  "namespace": "io.confluent.developer.avro",
+  "type": "record"
+}
